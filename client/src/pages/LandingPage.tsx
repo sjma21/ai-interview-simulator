@@ -93,7 +93,7 @@ export default function LandingPage({ onStart, onLearn, onAssistant, onCoding, o
       </nav>
 
       {/* ── HERO ── */}
-      <section className="relative z-10 flex flex-col items-center text-center px-6 pt-10 pb-16">
+      <section className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 pt-10 pb-16">
 
         {/* Top badge */}
         <div className="inline-flex items-center gap-2.5 bg-white/[0.05] border border-white/10 rounded-full px-5 py-2 mb-8 animate-fade-up backdrop-blur-sm">
@@ -103,7 +103,7 @@ export default function LandingPage({ onStart, onLearn, onAssistant, onCoding, o
         </div>
 
         {/* Headline */}
-        <h1 className="animate-fade-up text-6xl sm:text-7xl md:text-8xl font-black leading-[0.9] tracking-tighter mb-6" style={{ animationDelay: "0.1s" }}>
+        <h1 className="animate-fade-up text-5xl sm:text-7xl md:text-8xl font-black leading-[0.9] tracking-tighter mb-6" style={{ animationDelay: "0.1s" }}>
           <span className="block text-white">Master</span>
           <span className="block" style={{
             background: "linear-gradient(135deg, #818cf8 0%, #a78bfa 25%, #c084fc 50%, #67e8f9 80%, #34d399 100%)",
@@ -250,7 +250,7 @@ export default function LandingPage({ onStart, onLearn, onAssistant, onCoding, o
       </section>
 
       {/* ── FEATURES ── */}
-      <section id="features" className="relative z-10 px-6 pb-20">
+      <section id="features" className="relative z-10 px-3 sm:px-6 pb-20">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-10">
             <p className="text-xs text-slate-600 uppercase tracking-[0.3em] font-semibold mb-3">Everything You Need</p>
@@ -442,7 +442,7 @@ export default function LandingPage({ onStart, onLearn, onAssistant, onCoding, o
       </section>
 
       {/* ── CONFIGURE ── */}
-      <section id="configure" className="relative z-10 px-6 pb-24">
+      <section id="configure" className="relative z-10 px-3 sm:px-6 pb-24">
         <div className="max-w-3xl mx-auto">
 
           {/* Section header */}
@@ -452,7 +452,7 @@ export default function LandingPage({ onStart, onLearn, onAssistant, onCoding, o
             <p className="text-slate-500 text-sm">Choose your domain and difficulty, then step into the interview room.</p>
           </div>
 
-          <div className="bg-white/[0.03] backdrop-blur-xl border border-white/8 rounded-3xl p-8 shadow-2xl shadow-black/60 space-y-8">
+          <div className="bg-white/[0.03] backdrop-blur-xl border border-white/8 rounded-3xl p-4 sm:p-8 shadow-2xl shadow-black/60 space-y-8">
 
             {/* Domain */}
             <div>
@@ -460,7 +460,7 @@ export default function LandingPage({ onStart, onLearn, onAssistant, onCoding, o
                 <span className="flex items-center justify-center w-6 h-6 rounded-full bg-indigo-500/20 border border-indigo-500/30 text-xs font-black text-indigo-400">1</span>
                 <p className="text-xs text-slate-400 uppercase tracking-widest font-bold">Choose Domain</p>
               </div>
-              <div className="grid grid-cols-4 gap-3">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 {domains.map((d) => (
                   <button
                     key={d.value}
@@ -490,18 +490,18 @@ export default function LandingPage({ onStart, onLearn, onAssistant, onCoding, o
                 <span className="flex items-center justify-center w-6 h-6 rounded-full bg-indigo-500/20 border border-indigo-500/30 text-xs font-black text-indigo-400">2</span>
                 <p className="text-xs text-slate-400 uppercase tracking-widest font-bold">Set Difficulty</p>
               </div>
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-3 gap-2">
                 {difficulties.map((d) => (
                   <button
                     key={d.value}
                     onClick={() => setDifficulty(d.value)}
-                    className={`flex items-center gap-3 px-5 py-4 rounded-2xl border-2 transition-all duration-200 cursor-pointer shadow-lg ${
+                    className={`flex items-center gap-2 px-3 sm:px-5 py-3 sm:py-4 rounded-2xl border-2 transition-all duration-200 cursor-pointer shadow-lg ${
                       difficulty === d.value
                         ? `${d.active} shadow-lg ${d.ring} scale-[1.02]`
                         : "bg-white/[0.03] border-white/10 hover:border-white/20"
                     }`}
                   >
-                    <span className="text-2xl">{d.emoji}</span>
+                    <span className="text-xl sm:text-2xl">{d.emoji}</span>
                     <div className="text-left">
                       <p className={`text-sm font-bold ${difficulty === d.value ? d.text : "text-slate-300"}`}>{d.value}</p>
                       <p className="text-xs text-slate-500">{d.desc}</p>
@@ -563,7 +563,7 @@ export default function LandingPage({ onStart, onLearn, onAssistant, onCoding, o
             <div className="border-t border-white/5" />
 
             {/* Session Preview */}
-            <div className="flex items-center justify-between bg-white/[0.04] border border-white/8 rounded-2xl px-5 py-4">
+            <div className="flex flex-wrap items-center justify-between gap-3 bg-white/[0.04] border border-white/8 rounded-2xl px-4 py-4">
               <div className="flex items-center gap-3">
                 <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-indigo-500/30 to-violet-500/20 border border-indigo-500/30 flex items-center justify-center text-2xl">
                   {selectedDomain.icon}
