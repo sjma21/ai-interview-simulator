@@ -495,16 +495,16 @@ export default function LandingPage({ onStart, onLearn, onAssistant, onCoding, o
                   <button
                     key={d.value}
                     onClick={() => setDifficulty(d.value)}
-                    className={`flex items-center gap-2 px-3 sm:px-5 py-3 sm:py-4 rounded-2xl border-2 transition-all duration-200 cursor-pointer shadow-lg ${
+                    className={`flex flex-col sm:flex-row items-center sm:items-center gap-1 sm:gap-2 px-2 sm:px-5 py-3 sm:py-4 rounded-2xl border-2 transition-all duration-200 cursor-pointer shadow-lg ${
                       difficulty === d.value
                         ? `${d.active} shadow-lg ${d.ring} scale-[1.02]`
                         : "bg-white/[0.03] border-white/10 hover:border-white/20"
                     }`}
                   >
                     <span className="text-xl sm:text-2xl">{d.emoji}</span>
-                    <div className="text-left">
-                      <p className={`text-sm font-bold ${difficulty === d.value ? d.text : "text-slate-300"}`}>{d.value}</p>
-                      <p className="text-xs text-slate-500">{d.desc}</p>
+                    <div className="text-center sm:text-left">
+                      <p className={`text-xs sm:text-sm font-bold leading-tight ${difficulty === d.value ? d.text : "text-slate-300"}`}>{d.value}</p>
+                      <p className="hidden sm:block text-xs text-slate-500">{d.desc}</p>
                     </div>
                   </button>
                 ))}
