@@ -203,8 +203,8 @@ function SetupScreen({
   const isReady = lang && topic && difficulty;
 
   return (
-    <div className="flex-1 overflow-y-auto px-8 py-8 scrollbar-thin">
-      <div className="max-w-3xl mx-auto space-y-8">
+    <div className="flex-1 overflow-y-auto px-4 sm:px-8 py-6 sm:py-8 scrollbar-thin">
+      <div className="max-w-3xl mx-auto space-y-6 sm:space-y-8">
         <div>
           <h2 className="text-2xl font-extrabold text-white mb-1">Configure Your Session</h2>
           <p className="text-slate-500 text-sm">Pick your language, topic, and difficulty — then start coding.</p>
@@ -213,18 +213,18 @@ function SetupScreen({
         {/* Language */}
         <section>
           <p className="text-xs text-slate-500 uppercase tracking-widest font-semibold mb-3">01 — Language</p>
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {LANGUAGES.map((l) => (
               <button
                 key={l.id}
                 onClick={() => setLang(l.id)}
-                className={`flex items-center gap-3 px-4 py-3.5 rounded-2xl border transition-all cursor-pointer ${
+                className={`flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-3 sm:py-3.5 rounded-2xl border transition-all cursor-pointer ${
                   lang === l.id
                     ? "bg-violet-600/15 border-violet-500/50 text-white ring-1 ring-violet-500/30"
                     : "bg-white/3 border-white/8 text-slate-400 hover:border-white/20 hover:text-white"
                 }`}
               >
-                <span className="text-xl">{l.icon}</span>
+                <span className="text-lg sm:text-xl">{l.icon}</span>
                 <span className="text-sm font-semibold">{l.label}</span>
                 {lang === l.id && (
                   <svg className="ml-auto w-4 h-4 text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -239,26 +239,26 @@ function SetupScreen({
         {/* Topic */}
         <section>
           <p className="text-xs text-slate-500 uppercase tracking-widest font-semibold mb-3">02 — Topic</p>
-          <div className="grid grid-cols-5 gap-2">
+          <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
             {TOPICS.map((t) => (
               <button
                 key={t.label}
                 onClick={() => setTopic(t.label)}
-                className={`flex flex-col items-center gap-1.5 px-2 py-3 rounded-xl border text-center transition-all cursor-pointer ${
+                className={`flex sm:flex-col items-center gap-3 sm:gap-1.5 px-3 sm:px-2 py-3 rounded-xl border text-center transition-all cursor-pointer ${
                   topic === t.label
                     ? "bg-indigo-600/15 border-indigo-500/50 text-white ring-1 ring-indigo-500/30"
                     : "bg-white/3 border-white/8 text-slate-400 hover:border-white/20 hover:text-white"
                 }`}
               >
-                <span className="text-lg">{t.icon}</span>
-                <span className="text-[11px] font-semibold leading-tight">{t.label}</span>
+                <span className="text-lg flex-shrink-0">{t.icon}</span>
+                <span className="text-[11px] font-semibold leading-tight text-left sm:text-center">{t.label}</span>
               </button>
             ))}
           </div>
         </section>
 
-        {/* Difficulty + Timer side by side */}
-        <div className="grid grid-cols-2 gap-6">
+        {/* Difficulty + Timer stacked on mobile, side by side on desktop */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
           <section>
             <p className="text-xs text-slate-500 uppercase tracking-widest font-semibold mb-3">03 — Difficulty</p>
             <div className="flex gap-3">
@@ -277,12 +277,12 @@ function SetupScreen({
           </section>
           <section>
             <p className="text-xs text-slate-500 uppercase tracking-widest font-semibold mb-3">04 — Timer (optional)</p>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
               {TIMER_OPTIONS.map((t) => (
                 <button
                   key={t.label}
                   onClick={() => setTimerSec(t.seconds)}
-                  className={`flex-1 py-3 rounded-xl border text-xs font-semibold transition-all cursor-pointer ${
+                  className={`flex-1 min-w-[4rem] py-3 rounded-xl border text-xs font-semibold transition-all cursor-pointer ${
                     timerSec === t.seconds
                       ? "bg-cyan-600/15 border-cyan-500/50 text-cyan-300 ring-1 ring-cyan-500/30"
                       : "bg-white/3 border-white/8 text-slate-400 hover:border-white/20 hover:text-white"
@@ -475,7 +475,7 @@ export default function CodingPage({ onBack }: CodingPageProps) {
       </div>
 
       {/* ─── Top Bar ─── */}
-      <header className="relative z-10 flex-shrink-0 border-b border-white/5 bg-[#0d0d14]/90 backdrop-blur px-6 py-3 flex items-center gap-4">
+      <header className="relative z-10 flex-shrink-0 border-b border-white/5 bg-[#0d0d14]/90 backdrop-blur px-4 sm:px-6 py-3 flex items-center gap-3 sm:gap-4 overflow-hidden">
         <button
           onClick={onBack}
           className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-slate-200 transition-colors cursor-pointer group"
@@ -497,19 +497,19 @@ export default function CodingPage({ onBack }: CodingPageProps) {
 
         {phase === "coding" && question && (
           <>
-            <span className="text-white/10">│</span>
-            <span className="text-sm font-semibold text-white">{question.title}</span>
-            <span className={`text-xs font-bold px-2.5 py-1 rounded-full border ${
+            <span className="text-white/10 hidden sm:inline">│</span>
+            <span className="text-sm font-semibold text-white truncate max-w-[120px] sm:max-w-none">{question.title}</span>
+            <span className={`text-xs font-bold px-2.5 py-1 rounded-full border flex-shrink-0 ${
               selectedDiff === "Easy" ? "text-emerald-400 bg-emerald-500/10 border-emerald-500/20"
                 : selectedDiff === "Medium" ? "text-amber-400 bg-amber-500/10 border-amber-500/20"
                 : "text-red-400 bg-red-500/10 border-red-500/20"
             }`}>{selectedDiff}</span>
             {selectedTopic && (
-              <span className="text-xs text-slate-600 flex items-center gap-1">
+              <span className="text-xs text-slate-600 hidden md:flex items-center gap-1">
                 <span className="text-slate-700">·</span>{selectedTopic}
               </span>
             )}
-            <span className="text-xs text-slate-600 flex items-center gap-1.5">
+            <span className="text-xs text-slate-600 hidden sm:flex items-center gap-1.5">
               {currentLang?.icon} {currentLang?.label}
             </span>
           </>
@@ -544,26 +544,28 @@ export default function CodingPage({ onBack }: CodingPageProps) {
             <>
               <button
                 onClick={handleReset}
-                className="text-xs px-3 py-1.5 rounded-lg border border-white/10 bg-white/3 hover:bg-white/8 text-slate-400 hover:text-white transition-all cursor-pointer"
+                className="text-xs px-2 sm:px-3 py-1.5 rounded-lg border border-white/10 bg-white/3 hover:bg-white/8 text-slate-400 hover:text-white transition-all cursor-pointer whitespace-nowrap"
               >
-                New Question
+                <span className="hidden sm:inline">New Question</span>
+                <span className="sm:hidden">New</span>
               </button>
               <button
                 onClick={() => triggerSubmit(false)}
                 disabled={submitting}
-                className="flex items-center gap-2 text-sm font-bold px-4 py-2 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed text-white transition-all shadow-lg shadow-violet-900/40 active:scale-[0.98] cursor-pointer"
+                className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-bold px-3 sm:px-4 py-2 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed text-white transition-all shadow-lg shadow-violet-900/40 active:scale-[0.98] cursor-pointer whitespace-nowrap"
               >
                 {submitting ? (
                   <>
                     <span className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                    Analyzing…
+                    <span className="hidden sm:inline">Analyzing…</span>
                   </>
                 ) : (
                   <>
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    Submit Code
+                    Submit
+                    <span className="hidden sm:inline"> Code</span>
                   </>
                 )}
               </button>

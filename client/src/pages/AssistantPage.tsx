@@ -135,7 +135,7 @@ function StudyPlanForm({ onSubmit, loading }: { onSubmit: (d: string, e: string,
               <button
                 key={lvl} type="button"
                 onClick={() => setExperience(lvl)}
-                className={`text-xs py-2.5 px-3 rounded-xl border transition-all text-left font-medium cursor-pointer ${
+                className={`text-xs py-2.5 px-2 sm:px-3 rounded-xl border transition-all text-center font-medium cursor-pointer leading-tight ${
                   experience === lvl
                     ? "bg-violet-600/20 border-violet-500/50 text-violet-300"
                     : "bg-white/3 border-white/8 text-slate-500 hover:border-white/20 hover:text-slate-300"
@@ -147,8 +147,8 @@ function StudyPlanForm({ onSubmit, loading }: { onSubmit: (d: string, e: string,
           </div>
         </div>
 
-        {/* Hours + Weeks side by side */}
-        <div className="grid grid-cols-2 gap-4">
+        {/* Hours + Weeks side by side on desktop, stacked on mobile */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
           <div>
             <label className="block text-xs font-semibold text-slate-400 uppercase tracking-widest mb-2">
               Hours / Day
@@ -457,8 +457,8 @@ export default function AssistantPage({ onBack }: AssistantPageProps) {
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-indigo-600/8 rounded-full blur-3xl" />
       </div>
 
-      {/* ── Sidebar ── */}
-      <aside className="relative z-10 w-72 flex-shrink-0 border-r border-white/5 bg-[#0d0d14] flex flex-col">
+      {/* ── Sidebar (desktop only) ── */}
+      <aside className="relative z-10 w-72 flex-shrink-0 border-r border-white/5 bg-[#0d0d14] hidden md:flex flex-col">
         {/* Brand */}
         <div className="px-6 py-5 border-b border-white/5">
           <div className="flex items-center gap-2.5">
@@ -540,8 +540,50 @@ export default function AssistantPage({ onBack }: AssistantPageProps) {
 
       {/* ── Main Area ── */}
       <div className="relative z-10 flex-1 flex flex-col min-w-0">
+
+        {/* ── Mobile top bar (hidden on desktop) ── */}
+        <div className="md:hidden flex-shrink-0 border-b border-white/5 bg-[#0d0d14] px-4 py-3 space-y-3">
+          {/* Back + title row */}
+          <div className="flex items-center gap-3">
+            <button onClick={onBack} className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-white transition-colors cursor-pointer">
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+              Home
+            </button>
+            <span className="text-white/10">│</span>
+            <div className="flex items-center gap-2">
+              <div className="w-6 h-6 rounded-md bg-gradient-to-br from-violet-600 to-indigo-600 flex items-center justify-center">
+                <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                </svg>
+              </div>
+              <span className="text-sm font-semibold text-white">AI Study Assistant</span>
+            </div>
+          </div>
+          {/* Mode tabs */}
+          <div className="flex gap-2">
+            {(["study-plan", "explain"] as Mode[]).map((m) => (
+              <button
+                key={m}
+                onClick={() => switchMode(m)}
+                className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl border text-xs font-semibold transition-all cursor-pointer ${
+                  mode === m
+                    ? m === "study-plan"
+                      ? "bg-violet-600/20 border-violet-500/40 text-violet-300"
+                      : "bg-cyan-600/20 border-cyan-500/40 text-cyan-300"
+                    : "bg-white/3 border-white/8 text-slate-500"
+                }`}
+              >
+                {modeConfig[m].icon}
+                {modeConfig[m].label}
+              </button>
+            ))}
+          </div>
+        </div>
+
         {/* Header */}
-        <header className="flex-shrink-0 border-b border-white/5 bg-[#0d0d14]/80 backdrop-blur px-6 py-4 flex items-center justify-between">
+        <header className="flex-shrink-0 border-b border-white/5 bg-[#0d0d14]/80 backdrop-blur px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
           <div>
             <h1 className="text-sm font-bold text-white">
               {mode === "study-plan" ? "📋 Study Plan Generator" : "⚡ Paragraph Explainer"}
@@ -566,7 +608,7 @@ export default function AssistantPage({ onBack }: AssistantPageProps) {
         </header>
 
         {/* Scrollable content */}
-        <div className="flex-1 overflow-y-auto px-6 py-6 scrollbar-thin">
+        <div className="flex-1 overflow-y-auto px-4 sm:px-6 py-5 sm:py-6 scrollbar-thin">
           {/* Input form (shown at top before starting, or hidden once started) */}
           {!hasStarted && (
             <div className="mb-8">
@@ -600,7 +642,7 @@ export default function AssistantPage({ onBack }: AssistantPageProps) {
 
         {/* Follow-up chat input (shown after first response) */}
         {hasStarted && !loading && messages.some((m) => m.role === "assistant") && (
-          <div className="flex-shrink-0 border-t border-white/5 bg-[#0d0d14]/80 backdrop-blur px-6 py-4">
+          <div className="flex-shrink-0 border-t border-white/5 bg-[#0d0d14]/80 backdrop-blur px-4 sm:px-6 py-4">
             <div className="flex items-end gap-3">
               <div className="flex-1 relative">
                 <textarea
