@@ -455,7 +455,7 @@ export default function CodingPage({ onBack }: CodingPageProps) {
     setQuestion(null);
     setCode("");
     setAnalysis("");
-    setScore(null);
+
     setTimedOut(false);
     setActiveTab("problem");
   };
